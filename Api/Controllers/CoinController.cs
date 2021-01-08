@@ -11,15 +11,18 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/coin-jar")]
-    public class CoinController : Controller
+    public class CoinController : ControllerBase
     {
-
         private readonly ICoinJar _coinJarService;
         private readonly Context _dbContext;
 
-        public CoinController(ICoinJar coinJarService)
+        //public CoinController(ICoinJar coinJarService)
+        //{
+        //    _coinJarService = coinJarService;
+        //}
+
+        public CoinController()
         {
-            _coinJarService = coinJarService;
         }
 
         [Route("add-coin")]
@@ -29,9 +32,9 @@ namespace Api.Controllers
             
         }
 
-        [Route("get-total-coins")]
+        //[Route("api/coin-jar/GetTotalCoins")]
         [HttpGet]
-        public decimal GetTotalAmount()
+        public decimal GetTotalCoins()
         {
             return 0;
         }
