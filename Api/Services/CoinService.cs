@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Api.Helpers;
 using Microsoft.Extensions.Caching.Memory;
 using Api.Domain;
+using Api.Domain.Models;
 
 namespace Api.Services
 {
@@ -21,38 +22,39 @@ namespace Api.Services
         }
         public void AddCoin(ICoin coin)
         {
-            var test = _dbContext.CoinJar;
-
+            var coinJar = GetCoinJar();
 
             if (coin.CurrencyType != Constants.CurrencyType)
             {
                 throw new Exception("CoinJar only accepts only United States Currency!");
             }
 
-            if (Constants.CoinJarTotalVolume < (Coins.Sum(o => o.Volume) + coin.Volume))
+            if (Constants.CoinJarTotalVolume < (coinJar.Sum(o => o.Volume) + coin.Volume))
             {
                 throw new Exception("CoinJar is full!");
             }
 
             Coins.Add(coin);
-
-
-            //test.Value = coin.
         }
 
-        public void GetTest()
-        {
-            var test = _dbContext.CoinJar.ToList();
-        }
-
+      
         public decimal GetTotalAmount()
         {
-            throw new NotImplementedException();
+            var test = _dbContext.CoinJar.ToList();
+
+            return test.Count();
+        }
+
+        private List<CoinJar> GetCoinJar()
+        {
+            return _dbContext.CoinJar.ToList();
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            _dbContext.CoinJar.RemoveRange();
+
+
         }
     }
 }

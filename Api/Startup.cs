@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Interfaces;
+using Api.Services;
 
 namespace Api
 {
@@ -31,6 +33,7 @@ namespace Api
             services.AddLogging();
             services.AddMemoryCache();
             services.AddMvc();
+            services.AddScoped<ICoinJar, CoinService>();
 
             var ConnectionString = Configuration.GetConnectionString("GlobalKineticConstr");
             //var ConnectionString = "Server=.;Database=GlobalKinetic;Trusted_Connection=True;Integrated Security=false; User Id=sqlEBQuotes; Password=YbekFdBnQBp7TA; Persist Security Info=true; ";

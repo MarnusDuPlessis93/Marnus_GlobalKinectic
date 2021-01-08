@@ -4,46 +4,47 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
 using Api.Domain;
+using Api.Services;
+using Newtonsoft.Json;
 
 namespace Api.Controllers
 {
     [ApiController]
     [Route("api/coin-jar")]
-    public class CoinController : ControllerBase
+    public class CoinController : Controller
     {
         private readonly ICoinJar _coinJarService;
-        private readonly Context _dbContext;
 
-        //public CoinController(ICoinJar coinJarService)
-        //{
-        //    _coinJarService = coinJarService;
-        //}
-
-        public CoinController()
+        public CoinController(ICoinJar coinJarService)
         {
+            _coinJarService = coinJarService;
         }
-
+      
         [Route("add-coin")]
         [HttpPost]
-        public void AddCoin(ICoin coin)
+        public JsonResult AddCoin(ICoin coin)
         {
-            
+
+            return Json("Your Coin has been added to the Jar!");
         }
 
-        //[Route("api/coin-jar/GetTotalCoins")]
+        [Route("total-coins")]
         [HttpGet]
-        public decimal GetTotalCoins()
+        public JsonResult GetTotalCoins()
         {
-            return 0;
+            var result = _coinJarService.GetTotalAmount();
+
+            return Json("Total Amount in Coin Jar: " + result);
         }
 
         [Route("reset-coin-jar")]
         [HttpPost]
-        public void Reset()
+        public JsonResult Reset()
         {
+            _coinJarService.Reset();
 
+            return Json("Coin Jar has been reset!");
         }
     }
 }
