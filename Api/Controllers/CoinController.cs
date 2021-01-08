@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using Api.Domain;
 using Api.Services;
 using Newtonsoft.Json;
+using Api.Domain.Models;
+using Api.Models;
 
 namespace Api.Controllers
 {
     [ApiController]
+    [Produces("application/json")]
     [Route("api/coin-jar")]
     public class CoinController : Controller
     {
@@ -23,8 +26,9 @@ namespace Api.Controllers
       
         [Route("add-coin")]
         [HttpPost]
-        public JsonResult AddCoin(ICoin coin)
+        public JsonResult AddCoin([FromBody] CoinViewModel coin)
         {
+            _coinJarService.AddCoin(coin);
 
             return Json("Your Coin has been added to the Jar!");
         }
@@ -35,7 +39,7 @@ namespace Api.Controllers
         {
             var result = _coinJarService.GetTotalAmount();
 
-            return Json("Total Amount in Coin Jar: " + result);
+            return Json("Total Amount in Coin Jar: $" + result/100);
         }
 
         [Route("reset-coin-jar")]

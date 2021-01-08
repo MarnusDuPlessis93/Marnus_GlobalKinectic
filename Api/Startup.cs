@@ -36,14 +36,9 @@ namespace Api
             services.AddScoped<ICoinJar, CoinService>();
 
             var ConnectionString = Configuration.GetConnectionString("GlobalKineticConstr");
-            //var ConnectionString = "Server=.;Database=GlobalKinetic;Trusted_Connection=True;Integrated Security=false; User Id=sqlEBQuotes; Password=YbekFdBnQBp7TA; Persist Security Info=true; ";
-
-
-            //Entity Framework  
             services.AddDbContext<Context>(options => options.UseSqlServer(ConnectionString));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -62,5 +57,6 @@ namespace Api
                 endpoints.MapControllers();
             });
         }
+
     }
 }

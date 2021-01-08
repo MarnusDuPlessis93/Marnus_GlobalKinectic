@@ -9,10 +9,6 @@ namespace Api.Domain
 {
     public class Context : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=.;Database=GlobalKinetic;Trusted_Connection=True;");
-        }
         public Context(DbContextOptions<Context> options) : base(options)
         {
 

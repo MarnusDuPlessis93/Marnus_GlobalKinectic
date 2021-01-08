@@ -12,13 +12,12 @@ namespace Api.Services
 {
     public class CoinService : ICoinJar
     {
-        private readonly List<ICoin> Coins;
-        private IMemoryCache _cache;
         private readonly Context _dbContext;
 
         public CoinService(Context context)
         {
             _dbContext = context;
+
         }
         public void AddCoin(ICoin coin)
         {
@@ -34,15 +33,27 @@ namespace Api.Services
                 throw new Exception("CoinJar is full!");
             }
 
-            Coins.Add(coin);
+            var volume = CurrencyHelper.GetCoinVolume(coin.Amount);
+
+            if (volume == null)
+            {
+                throw new Exception("Not valid United States Currency amount!");
+            }
+
+            var newCoin = new CoinJar
+            {
+                Amount = coin.Amount,
+                Volume = volume ?? 0
+            };
+
+            _dbContext.CoinJar.Add(newCoin);
+            _dbContext.SaveChanges();
         }
 
       
         public decimal GetTotalAmount()
         {
-            var test = _dbContext.CoinJar.ToList();
-
-            return test.Count();
+            return _dbContext.CoinJar.Sum(o => o.Amount);
         }
 
         private List<CoinJar> GetCoinJar()
@@ -53,8 +64,6 @@ namespace Api.Services
         public void Reset()
         {
             _dbContext.CoinJar.RemoveRange();
-
-
         }
     }
 }
