@@ -1,5 +1,7 @@
 Global Kinectic Documentation
 
+Clone repository: https://github.com/MarnusDuPlessis93/Marnus_GlobalKinectic
+
 1. Open solution in Visual Studio.
 2. Open MS SQL Server
 3. Create a new database on your local machine and call it "GlobalKinetic"
