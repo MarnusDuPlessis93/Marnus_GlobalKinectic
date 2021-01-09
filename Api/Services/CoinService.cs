@@ -26,12 +26,12 @@ namespace Api.Services
                 throw new Exception("CoinJar only accepts only United States Currency!");
             }
 
-            if (Constants.CoinJarTotalVolume < (coinJar.Sum(o => o.Volume) + coin.Volume))
+            var volume = CurrencyHelper.GetCoinVolume(coin.Amount);
+
+            if (Constants.CoinJarTotalVolume < (coinJar.Sum(o => o.Volume) + volume))
             {
                 throw new Exception("CoinJar is full!");
             }
-
-            var volume = CurrencyHelper.GetCoinVolume(coin.Amount);
 
             if (volume == null)
             {
