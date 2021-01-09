@@ -1,17 +1,10 @@
 using Api.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Api.Interfaces;
 using Api.Services;
 
@@ -33,10 +26,12 @@ namespace Api
             services.AddLogging();
             services.AddMemoryCache();
             services.AddMvc();
+
+            //Dependancy injection
             services.AddScoped<ICoinJar, CoinService>();
 
-            var ConnectionString = Configuration.GetConnectionString("GlobalKineticConstr");
-            services.AddDbContext<Context>(options => options.UseSqlServer(ConnectionString));
+            var connectionString = Configuration.GetConnectionString("GlobalKineticConstr");
+            services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

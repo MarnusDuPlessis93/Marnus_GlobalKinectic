@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Api.Helpers;
-using Microsoft.Extensions.Caching.Memory;
 using Api.Domain;
 using Api.Domain.Models;
 
@@ -37,7 +35,8 @@ namespace Api.Services
 
             if (volume == null)
             {
-                throw new Exception("Not valid United States Currency amount!");
+                throw new Exception("Not valid United States Currency amount! " +
+                    "CoinJar only accepts cents, dimes, nickles and quarters!");
             }
 
             var newCoin = new CoinJar

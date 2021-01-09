@@ -1,13 +1,5 @@
 ﻿using Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Api.Domain;
-using Api.Services;
-using Newtonsoft.Json;
-using Api.Domain.Models;
 using Api.Models;
 
 namespace Api.Controllers
@@ -43,7 +35,7 @@ namespace Api.Controllers
         }
 
         [Route("reset-coin-jar")]
-        [HttpPost]
+        [HttpGet]
         public JsonResult Reset()
         {
             _coinJarService.Reset();

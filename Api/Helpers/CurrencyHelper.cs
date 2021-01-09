@@ -14,7 +14,7 @@ namespace Api.Helpers
 
             return result;
         }
-        public static List<CoinViewModel> CoinTypes()
+        private static List<CoinViewModel> CoinTypes()
         {
             var coinTypes = new List<CoinViewModel>();
 
