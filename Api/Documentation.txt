@@ -13,7 +13,7 @@ Example of URL: "https://localhost:44389/api/coin-jar"
 8. Go to postman and click on headers. Input this: 
 "Content-Type" as the key
 "application/json" as the value
-9. Adding a coin: Set request on Postman to Postman (HttpPost)
+9. Adding a coin: Set request on Postman to POST (HttpPost)
 URL example: "https://localhost:44389/api/coin-jar/add-coin"
 Json: 
 {
