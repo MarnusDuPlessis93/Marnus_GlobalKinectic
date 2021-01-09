@@ -1,0 +1,22 @@
+﻿USE [GlobalKinetic]
+GO
+
+/****** Object:  Table [dbo].[CoinJar]    Script Date: 09/01/2021 14:03:31 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CoinJar](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Amount] [decimal](18, 4) NOT NULL,
+	[Volume] [decimal](18, 4) NOT NULL,
+ CONSTRAINT [PK_CoinJar] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

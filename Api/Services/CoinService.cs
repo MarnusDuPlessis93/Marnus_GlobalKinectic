@@ -62,7 +62,11 @@ namespace Api.Services
 
         public void Reset()
         {
-            _dbContext.CoinJar.RemoveRange();
+            var coinJar = GetCoinJar();
+
+            _dbContext.CoinJar.RemoveRange(coinJar);
+
+            _dbContext.SaveChanges();
         }
     }
 }

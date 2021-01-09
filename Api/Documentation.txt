@@ -1,0 +1,25 @@
+Global Kinectic Documentation
+
+1. Open solution in Visual Studio.
+2. Open MS SQL Server
+3. Create a new database on your local machine and call it "GlobalKinetic"
+4. Go to scripts folder in the solution and run "01_Create_Coin_Jar_Table.sql" in SQL Server.
+5. Download and install Postman to test the API: https://www.postman.com/downloads/
+6. Open up Postman
+7. Run Marnus_GlobalKinectic solution and copy the url into Postman. 
+Example of URL: "https://localhost:44389/api/coin-jar"
+8. Go to postman and click on headers. Input this: 
+"Content-Type" as the key
+"application/json" as the value
+9. Adding a coin: Set request on Postman to Postman (HttpPost)
+URL example: "https://localhost:44389/api/coin-jar/add-coin"
+Json: 
+{
+    "CurrencyType": "UNITED_STATES_DOLLAR",
+    "Amount" : 10
+}
+10. Get total coins: HttpGet
+URL example: "https://localhost:44389/api/coin-jar/total-coins"
+11. Reset coin jar
+URL example: "https://localhost:44389/api/coin-jar/reset-coin-jar"
+
